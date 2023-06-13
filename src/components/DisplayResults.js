@@ -58,7 +58,7 @@ export default function DisplayResults({
   };
 
   return (
-    <>
+    <div>
       {/* HANDLE FILTERED SEARCHING OF THE DATA LIST + PAGINATION VIEW */}
       <Grid container spacing={2}>
         {filterNewsData.length > 0 ? (
@@ -88,6 +88,6 @@ export default function DisplayResults({
           Load More
         </Button>
       )}
-    </>
+    </div>
   );
 }

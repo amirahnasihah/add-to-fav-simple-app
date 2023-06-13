@@ -84,14 +84,14 @@ export default function BasicGrid() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
+        {/* HEADER */}
         <Grid item xs={12} md={12}>
-          <Item>
-            <Header keyword={keyword} handleSetKeyword={handleSetKeyword} />
-          </Item>
+          <Header keyword={keyword} handleSetKeyword={handleSetKeyword} />
         </Grid>
-        <Grid item xs={4} md={4}>
+
+        {/* FAV PANEL */}
+        <Grid item xs={4} md={4} style={{ backgroundColor: "plum" }}>
           <Item>
-            {/* FAV PANEL */}
             <MyFavouritePanel
               favorites={favorites}
               handleSetKeyword={handleSetKeyword}
@@ -100,17 +100,18 @@ export default function BasicGrid() {
             />
           </Item>
         </Grid>
-        <Grid item xs={8} md={8}>
-          <Item>
-            {/* DISPLAY RESULTS✅ */}
-            <DisplayResults
-              page={page} // pagination
-              keyword={keyword} // for searching
-              updateMyFav={updateMyFav} // update fav
-              onLoadMore={onLoadMore} // load more btn
-            />
-          </Item>
+
+        {/* DISPLAY RESULTS✅ */}
+        <Grid item xs={8} md={8} style={{ backgroundColor: "pink" }}>
+          <DisplayResults
+            page={page} // pagination
+            keyword={keyword} // for searching
+            updateMyFav={updateMyFav} // update fav
+            onLoadMore={onLoadMore} // load more btn
+          />
         </Grid>
+
+        {/* FOOTER */}
         <Grid item xs={12} md={12}>
           <Item>
             <Footer />
