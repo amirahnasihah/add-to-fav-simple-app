@@ -79,14 +79,20 @@ export default function DisplayResults({
       {/* LOAD MORE PAGINATION */}
       {isLoading && <h6>Getting more...</h6>}
       {!isLoading && hasMore && (
-        <Button
-          variant="contained"
-          size="small"
-          style={{ margin: 10, backgroundColor: "plum", color: "purple" }}
-          onClick={onLoadMore}
-        >
-          Load More
-        </Button>
+        <Grid container justifyContent="center">
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              margin: 10,
+              backgroundColor: "plum",
+              color: "purple",
+            }}
+            onClick={onLoadMore}
+          >
+            Load More
+          </Button>
+        </Grid>
       )}
     </div>
   );
