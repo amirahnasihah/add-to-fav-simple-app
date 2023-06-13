@@ -10,11 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 
 export default function DatasItem({ news, updateMyFav, index }) {
-  const { id, name, description, author, title, urlToImage, publishedAt, url } =
-    news;
+  const { name, description, title, urlToImage, publishedAt, url } = news;
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -25,7 +23,7 @@ export default function DatasItem({ news, updateMyFav, index }) {
           </Avatar>
         }
         title={title.slice(0, 19)}
-        subheader={new Date(news.publishedAt).toLocaleDateString("en-MY")}
+        subheader={new Date(publishedAt).toLocaleDateString("en-MY")}
       />
       <CardMedia component="img" image={urlToImage} alt={title} />
       <CardContent sx={{ height: 100 }}>

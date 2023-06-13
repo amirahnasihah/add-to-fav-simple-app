@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import DatasItem from "./DatasItem";
 import api from "../api/itemsData";
-import axios from "axios";
 import { Button, Grid } from "@mui/material";
 
 export default function DisplayResults({

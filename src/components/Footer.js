@@ -22,7 +22,7 @@ function Footer() {
           </Link>
           {". source code can be accessed on "}
           <Link
-            href="https://github.com/amirahnasihah/food-order-app-usereducer"
+            href="https://github.com/amirahnasihah/add-to-fav-simple-app"
             title="GitHub food-order-website-usereducer"
             target="_blank"
             style={{ color: "white", textDecorationLine: "none" }}

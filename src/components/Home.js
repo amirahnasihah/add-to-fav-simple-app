@@ -10,7 +10,7 @@ import Footer from "./Footer";
 
 // STYLING
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#808080",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "pink",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
@@ -90,25 +90,30 @@ export default function BasicGrid() {
         </Grid>
 
         {/* FAV PANEL */}
-        <Grid item xs={4} md={4} style={{ backgroundColor: "plum" }}>
-          <Item>
-            <MyFavouritePanel
-              favorites={favorites}
-              handleSetKeyword={handleSetKeyword}
-              myFav={myFav} // add to fav
-              clearMyFav={clearMyFav} // clear fav
-            />
-          </Item>
+        <Grid item xs={3} md={3} style={{ backgroundColor: "plum" }}>
+          <MyFavouritePanel
+            favorites={favorites}
+            handleSetKeyword={handleSetKeyword}
+            myFav={myFav} // add to fav
+            clearMyFav={clearMyFav} // clear fav
+          />
         </Grid>
 
         {/* DISPLAY RESULTS✅ */}
-        <Grid item xs={8} md={8} style={{ backgroundColor: "pink" }}>
-          <DisplayResults
-            page={page} // pagination
-            keyword={keyword} // for searching
-            updateMyFav={updateMyFav} // update fav
-            onLoadMore={onLoadMore} // load more btn
-          />
+        <Grid
+          item
+          xs={9}
+          md={9}
+          style={{ backgroundColor: "pink", padding: 1 }}
+        >
+          <Item>
+            <DisplayResults
+              page={page} // pagination
+              keyword={keyword} // for searching
+              updateMyFav={updateMyFav} // update fav
+              onLoadMore={onLoadMore} // load more btn
+            />
+          </Item>
         </Grid>
 
         {/* FOOTER */}
