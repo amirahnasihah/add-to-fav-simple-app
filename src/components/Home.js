@@ -22,13 +22,13 @@ export default function BasicGrid() {
   // SEARCH BAR STATE✅
   const [keyword, setKeyword] = useState("");
   // PAGINATION STATE✅
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(4);
   // FAVOURITE PANEL - localstorage
   const [favorites, setFavorites] = useState([]);
 
   // handle pagination
   const onLoadMore = () => {
-    setPage((prevPage) => prevPage + 2);
+    setPage((prevPage) => prevPage + 4);
   };
 
   // handle searching to target each letter keyword

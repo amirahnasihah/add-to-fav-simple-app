@@ -1,26 +1,63 @@
-import React from "react";
-// import { AiFillLike } from "react-icons/ai";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
 
-export default function DatasItem({ news, updateMyFav }) {
-  const { id, name, description } = news;
+export default function DatasItem({ news, updateMyFav, index }) {
+  const { id, name, description, author, title, urlToImage, publishedAt, url } =
+    news;
 
   return (
-    <div>
-      <h3>
-        <strong>
-          {id}. {name}{" "}
-          {/* <AiFillLike
-						style={{ color: "yellow", cursor: "pointer" }}
-						onClick={() => {
-							console.log("updateMyFav");
-						}}
-					/> */}
-          <button style={{ cursor: "pointer" }} onClick={updateMyFav}>
-            Like
-          </button>
-        </strong>
-      </h3>
-      <p>{description}</p>
-    </div>
+    <Card sx={{ maxWidth: 345 }}>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: "plum" }} aria-label="avatar">
+            {name.charAt(0)}
+          </Avatar>
+        }
+        title={title.slice(0, 19)}
+        subheader={new Date(news.publishedAt).toLocaleDateString("en-MY")}
+      />
+      <CardMedia component="img" image={urlToImage} alt={title} />
+      <CardContent sx={{ height: 100 }}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            overflow: "auto",
+            maxHeight: "100px",
+            "::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
+          {description}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon style={{ color: "red" }} />
+        </IconButton>
+        <Button
+          variant="outlined"
+          size="small"
+          color="secondary"
+          href={url}
+          target="_blank"
+          rel="noopener"
+        >
+          READ MORE
+        </Button>
+      </CardActions>
+    </Card>
   );
 }

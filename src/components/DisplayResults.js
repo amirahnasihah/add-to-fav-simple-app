@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import DatasItem from "./DatasItem";
 import api from "../api/itemsData";
+import axios from "axios";
+import { Button, Grid } from "@mui/material";
 
 export default function DisplayResults({
   keyword,
@@ -16,13 +18,23 @@ export default function DisplayResults({
 
   // ✅ handle searchbar data filtering - multiple properties
   const filterNewsData = newsData.filter((item) => {
-    const propertiesToSearch = [item.name, item.description];
+    const propertiesToSearch = [item.title, item.description];
     const keywordLowerCase = keyword.toLowerCase();
 
     return propertiesToSearch.some((property) =>
       property.toLowerCase().includes(keywordLowerCase)
     );
   });
+
+  // const filterNewsData = newsData.filter((item) => {
+  //   const propertiesToSearch = [item.name, item.description];
+  //   const keywordLowerCase = keyword.toLowerCase();
+
+  //   return propertiesToSearch.some(
+  //     (property) =>
+  //       property && property.toLowerCase().includes(keywordLowerCase)
+  //   );
+  // });
 
   // get data from api
   useEffect(() => {
@@ -33,7 +45,7 @@ export default function DisplayResults({
     setIsLoading(true);
 
     try {
-      const response = await api.get("/itemsData");
+      const response = await api.get("/favourites");
       // PAGINATION LOGIC
       setNewsData(response.data);
       setHasMore(response.data.length > 0);
@@ -48,19 +60,34 @@ export default function DisplayResults({
   return (
     <>
       {/* HANDLE FILTERED SEARCHING OF THE DATA LIST + PAGINATION VIEW */}
-      {filterNewsData.length > 0 ? (
-        filterNewsData
-          .slice(0, page)
-          .map((item, index) => (
-            <DatasItem key={index} news={item} updateMyFav={updateMyFav} />
+      <Grid container spacing={2}>
+        {filterNewsData.length > 0 ? (
+          filterNewsData.slice(0, page).map((item, index) => (
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <DatasItem
+                key={index}
+                news={item}
+                updateMyFav={updateMyFav}
+                index={index} // numbering order bcs id is null
+              />
+            </Grid>
           ))
-      ) : (
-        <h2>No results found...</h2>
-      )}
-
+        ) : (
+          <h2>No results found...</h2>
+        )}
+      </Grid>
       {/* LOAD MORE PAGINATION */}
       {isLoading && <h6>Getting more...</h6>}
-      {!isLoading && hasMore && <button onClick={onLoadMore}>Load More</button>}
+      {!isLoading && hasMore && (
+        <Button
+          variant="contained"
+          size="small"
+          style={{ margin: 10, backgroundColor: "plum", color: "purple" }}
+          onClick={onLoadMore}
+        >
+          Load More
+        </Button>
+      )}
     </>
   );
 }
