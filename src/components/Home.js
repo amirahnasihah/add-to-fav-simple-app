@@ -1,8 +1,9 @@
 import { styled } from "@mui/material/styles";
 import { Box, Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-// Components
+// COMPONENTS
 import Header from "./Header";
 import MyFavouritePanel from "./MyFavouritePanel";
 import DisplayResults from "./DisplayResults";
@@ -24,7 +25,10 @@ export default function BasicGrid() {
   // PAGINATION STATE✅
   const [page, setPage] = useState(4);
   // FAVOURITE PANEL - localstorage
-  const [favorites, setFavorites] = useState([]);
+  const LOCALS_STORAGE_KEY = "myFavorites";
+  const [myFavorites, setMyFavorites] = useState(
+    JSON.parse(localStorage.getItem(LOCALS_STORAGE_KEY)) ?? []
+  );
 
   // handle pagination
   const onLoadMore = () => {
@@ -37,48 +41,41 @@ export default function BasicGrid() {
     setKeyword(e.target.value);
   };
 
-  // ✅ handle searchbar data filtering
-  // const filterItemsData = itemsData.filter((item) => {
-  // 	return item.name.toLowerCase().includes(keyword.toLowerCase());
-  // });
-
   // FAVOURITE PANEL
   useEffect(() => {
-    const favoritesFromStorage = localStorage.getItem("favorites");
+    const favoritesFromStorage = localStorage.getItem(LOCALS_STORAGE_KEY);
     if (favoritesFromStorage) {
       const parsedFavorites = JSON.parse(favoritesFromStorage);
-      setFavorites(parsedFavorites);
+      setMyFavorites(parsedFavorites);
     }
   }, []);
 
-  // handle favourite data CRUD - add to my fav / clear fav / update
-  const myFav = (item) => {
-    // Check if the item is already in favorites
-    const isAlreadyFav = favorites.some((favItem) => favItem.id === item.id);
-
-    if (!isAlreadyFav) {
-      // Add the item to favorites
-      const updatedFavorites = [...favorites, item];
-      setFavorites(updatedFavorites);
-
-      // Save updated favorites to local storage
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    }
-  };
-
-  // DELETE FAV
-  const clearMyFav = () => {
-    console.log("clearMyFav");
+  // Clear all favorites
+  const clearMyFavorites = () => {
     // Clear favorites state
-    setFavorites([]);
+    setMyFavorites([]);
 
-    // Clear favorites from local storage
-    localStorage.removeItem("favorites");
+    // Clear my-favorites from local storage
+    localStorage.removeItem(LOCALS_STORAGE_KEY);
   };
 
-  // UPDATE FAV
-  const updateMyFav = () => {
-    console.log("updateMyFav");
+  // Update favorites
+  const updateMyFavorites = (news) => {
+    const existingFavorite = myFavorites.find(
+      (favorite) => favorite.name === news.name
+    );
+    if (!existingFavorite) {
+      // Add the new favorite to the array with a unique identifier
+      const newFavorite = { name: news.name, ...news };
+      setMyFavorites([...myFavorites, newFavorite]);
+      // Save the updated favorites array to localStorage
+      localStorage.setItem(
+        LOCALS_STORAGE_KEY,
+        JSON.stringify([...myFavorites, newFavorite])
+      );
+    } else {
+      toast.success("Item Added Successfully");
+    }
   };
 
   return (
@@ -86,31 +83,29 @@ export default function BasicGrid() {
       <Grid container spacing={2}>
         {/* HEADER */}
         <Grid item xs={12} md={12}>
-          <Header keyword={keyword} handleSetKeyword={handleSetKeyword} />
+          <Item>
+            <Header keyword={keyword} handleSetKeyword={handleSetKeyword} />
+          </Item>
         </Grid>
 
         {/* FAV PANEL */}
-        <Grid item xs={3} md={3} style={{ backgroundColor: "plum" }}>
-          <MyFavouritePanel
-            favorites={favorites}
-            handleSetKeyword={handleSetKeyword}
-            myFav={myFav} // add to fav
-            clearMyFav={clearMyFav} // clear fav
-          />
+        <Grid xs={3} md={3} style={{ backgroundColor: "yellow" }}>
+          <Item>
+            <MyFavouritePanel
+              myFavorites={myFavorites} // favourite list stored
+              handleSetKeyword={handleSetKeyword}
+              clearMyFavorites={clearMyFavorites} // clear fav
+            />
+          </Item>
         </Grid>
 
         {/* DISPLAY RESULTS✅ */}
-        <Grid
-          item
-          xs={9}
-          md={9}
-          style={{ backgroundColor: "pink", padding: 1 }}
-        >
+        <Grid xs={9} md={9} style={{ backgroundColor: "pink", padding: 1 }}>
           <Item>
             <DisplayResults
               page={page} // pagination
               keyword={keyword} // for searching
-              updateMyFav={updateMyFav} // update fav
+              updateMyFavorites={updateMyFavorites} // update fav
               onLoadMore={onLoadMore} // load more btn
             />
           </Item>
