@@ -78,23 +78,19 @@ export default function DisplayResults({
       {/* LOAD MORE PAGINATION */}
       {isLoading && <Typography variant="h6">Getting more...</Typography>}
       {!isLoading && hasMore && (
-        <Grid container justifyContent="center">
-          <Button
-            variant="contained"
-            size="small"
-            style={{
-              margin: 10,
-              backgroundColor: "plum",
-              color: "purple",
-            }}
-            onClick={onLoadMore}
-          >
-            Load More
-          </Button>
-          <Grid></Grid>
-        </Grid>
+        <Button
+          variant="contained"
+          size="small"
+          style={{
+            margin: 10,
+            backgroundColor: "plum",
+            color: "purple",
+          }}
+          onClick={onLoadMore}
+        >
+          Load More
+        </Button>
       )}
-      {reachedEnd && <Alert severity="info">Reached the end of the list</Alert>}
     </div>
   );
 }

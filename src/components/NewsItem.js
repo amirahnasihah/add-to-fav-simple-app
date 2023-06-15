@@ -10,18 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useEffect } from "react";
 
 export default function DatasItem({ news, updateMyFavorites }) {
   const { name, description, title, urlToImage, publishedAt, url } = news;
-
-  useEffect(() => {
-    // Check if the news item is saved as a favorite
-    const storedFavorites = localStorage.getItem("myFavorites");
-    if (storedFavorites) {
-      updateMyFavorites(news);
-    }
-  }, []);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
