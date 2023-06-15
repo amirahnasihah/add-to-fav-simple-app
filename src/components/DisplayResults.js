@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
 import api from "../api/itemsData";
-import { Button, Grid, Typography } from "@mui/material";
-import Alert from "@mui/material/Alert";
+import { Box, Button, CircularProgress, Grid, Typography } from "@mui/material";
 
 export default function DisplayResults({
   keyword,
@@ -15,7 +14,6 @@ export default function DisplayResults({
   // PAGINATION
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [reachedEnd, setReachedEnd] = useState(false);
 
   // ✅ handle searchbar data filtering - multiple properties
   const filterNewsData = newsData.filter((item) => {
@@ -47,16 +45,8 @@ export default function DisplayResults({
     }
   };
 
-  // const onLoadMore = () => {
-  //   if (page >= filterNewsData.length) {
-  //     setReachedEnd(true);
-  //   } else {
-  //     setPage((prevPage) => prevPage + 2);
-  //   }
-  // };
-
   return (
-    <div>
+    <Box>
       {/* HANDLE FILTERED SEARCHING OF THE DATA LIST + PAGINATION VIEW */}
       <Grid container spacing={2}>
         {filterNewsData.length > 0 ? (
@@ -71,12 +61,22 @@ export default function DisplayResults({
             </Grid>
           ))
         ) : (
-          <h2>No results found...</h2>
+          <Grid item xs={12}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Typography variant="h4">No Results Found...</Typography>
+            </Box>
+          </Grid>
         )}
       </Grid>
 
       {/* LOAD MORE PAGINATION */}
-      {isLoading && <Typography variant="h6">Getting more...</Typography>}
+      {isLoading && (
+        <CircularProgress
+          style={{
+            color: "purple",
+          }}
+        />
+      )}
       {!isLoading && hasMore && (
         <Button
           variant="contained"
@@ -91,7 +91,7 @@ export default function DisplayResults({
           Load More
         </Button>
       )}
-    </div>
+    </Box>
   );
 }
 

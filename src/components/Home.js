@@ -74,7 +74,7 @@ export default function BasicGrid() {
         JSON.stringify([...myFavorites, newFavorite])
       );
     } else {
-      toast.success("Item Added Successfully");
+      toast.success("Added to favourites list");
     }
   };
 
@@ -83,14 +83,12 @@ export default function BasicGrid() {
       <Grid container spacing={2}>
         {/* HEADER */}
         <Grid item xs={12} md={12}>
-          <Item>
-            <Header keyword={keyword} handleSetKeyword={handleSetKeyword} />
-          </Item>
+          <Header keyword={keyword} handleSetKeyword={handleSetKeyword} />
         </Grid>
 
         {/* FAV PANEL */}
-        <Grid xs={3} md={3} style={{ backgroundColor: "yellow" }}>
-          <Item>
+        <Grid xs={3} md={3}>
+          <Item style={{ backgroundColor: "plum", height: "100%" }}>
             <MyFavouritePanel
               myFavorites={myFavorites} // favourite list stored
               handleSetKeyword={handleSetKeyword}
@@ -100,8 +98,8 @@ export default function BasicGrid() {
         </Grid>
 
         {/* DISPLAY RESULTS✅ */}
-        <Grid xs={9} md={9} style={{ backgroundColor: "pink", padding: 1 }}>
-          <Item>
+        <Grid xs={9} md={9}>
+          <Item style={{ backgroundColor: "orange", height: "100%" }}>
             <DisplayResults
               page={page} // pagination
               keyword={keyword} // for searching
@@ -112,7 +110,7 @@ export default function BasicGrid() {
         </Grid>
 
         {/* FOOTER */}
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={12} lg={12}>
           <Item>
             <Footer />
           </Item>

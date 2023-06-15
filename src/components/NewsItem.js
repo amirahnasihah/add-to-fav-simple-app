@@ -9,7 +9,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 
 export default function DatasItem({ news, updateMyFavorites }) {
   const { name, description, title, urlToImage, publishedAt, url } = news;
@@ -22,7 +22,7 @@ export default function DatasItem({ news, updateMyFavorites }) {
             {name.charAt(0)}
           </Avatar>
         }
-        title={title.slice(0, 19)}
+        title={title.slice(0, 20)}
         subheader={new Date(publishedAt).toLocaleDateString("en-MY")}
       />
       <CardMedia component="img" image={urlToImage} alt={title} />
@@ -36,6 +36,7 @@ export default function DatasItem({ news, updateMyFavorites }) {
             "::-webkit-scrollbar": {
               display: "none",
             },
+            cursor: "default",
           }}
         >
           {description}
@@ -45,9 +46,8 @@ export default function DatasItem({ news, updateMyFavorites }) {
         <IconButton
           aria-label="add to favorites"
           onClick={() => updateMyFavorites(news)}
-          style={{ color: "red" }}
         >
-          <FavoriteIcon />
+          <AddCircleRoundedIcon />
         </IconButton>
         <Button
           variant="outlined"

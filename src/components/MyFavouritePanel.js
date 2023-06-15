@@ -25,8 +25,7 @@ export default function FavPanel({
               <div
                 key={item.id}
                 style={{
-                  paddingTop: "10px",
-                  fontWeight: "bold",
+                  paddingTop: "8px",
                 }}
               >
                 <a
@@ -36,12 +35,12 @@ export default function FavPanel({
                   className="link"
                   onClick={() => handleSetKeyword}
                 >
-                  {item.title}
+                  <Typography variant="caption">{item.title}</Typography>
                 </a>
+                <hr />
               </div>
             ))}
         </div>
-        <hr />
       </Box>
     </Grid>
   );

@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { AppBar, Box, Button, Chip, Toolbar, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
@@ -47,45 +46,44 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header({ keyword, handleSetKeyword }) {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [userName, setUserName] = useState(false);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="secondary">
-        <Toolbar>
-          {/* LOGO */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            MUI
-          </Typography>
-          <img
-            style={{ width: 22, display: { md: "flex" }, mr: 1 }}
-            src={icon}
-            alt="icon ketupat"
-          />
-
-          {/* SEARCH INPUT */}
-          <Search sx={{ flexGrow: 1 }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              type="text"
-              placeholder="type something..."
-              value={keyword}
-              onChange={handleSetKeyword}
-              inputProps={{ "aria-label": "search" }}
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            {/* LOGO */}
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              MUI
+            </Typography>
+            <img
+              style={{ width: 22, display: { md: "flex" }, marginRight: 1 }}
+              src={icon}
+              alt="icon ketupat"
             />
-          </Search>
+
+            {/* SEARCH INPUT */}
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                type="text"
+                placeholder="type something..."
+                value={keyword}
+                onChange={handleSetKeyword}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Box>
 
           {/* LOGOUT, CHIP */}
-          <Box sx={{ flexGrow: 1 }}>
-            <Chip label="Chip Filled" />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Chip label="Chip Filled" sx={{ marginRight: 1 }} />
             <Button color="inherit">LogOut</Button>
           </Box>
         </Toolbar>
