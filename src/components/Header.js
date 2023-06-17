@@ -52,14 +52,7 @@ export default function Header({ keyword, handleSetKeyword }) {
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {/* LOGO */}
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
-            >
-              MUI
-            </Typography>
+
             <img
               style={{ width: 22, display: { md: "flex" }, marginRight: 1 }}
               src={icon}
