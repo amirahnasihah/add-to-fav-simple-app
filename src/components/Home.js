@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import { Box, Grid, Paper } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 // COMPONENTS
@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 // MAIN LOGIC
-export default function BasicGrid() {
+export default function Home() {
   // SEARCH BAR STATE✅
   const [keyword, setKeyword] = useState("");
   // PAGINATION STATE✅
@@ -29,6 +29,8 @@ export default function BasicGrid() {
   const [myFavorites, setMyFavorites] = useState(
     JSON.parse(localStorage.getItem(LOCALS_STORAGE_KEY)) ?? []
   );
+  // REF for display results height
+  const displayResultsRef = useRef(null);
 
   // handle pagination
   const onLoadMore = () => {
@@ -78,6 +80,17 @@ export default function BasicGrid() {
     }
   };
 
+  // Update favorite panel height to match display results height
+  useEffect(() => {
+    if (displayResultsRef.current) {
+      const displayResultsHeight = displayResultsRef.current.clientHeight;
+      const favoritePanel = document.getElementById("favorite-panel");
+      if (favoritePanel) {
+        favoritePanel.style.height = `${displayResultsHeight}px`;
+      }
+    }
+  }, [page]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -87,26 +100,32 @@ export default function BasicGrid() {
         </Grid>
 
         {/* FAV PANEL */}
-        <Grid xs={3} md={3}>
-          <Item style={{ backgroundColor: "plum", height: "100%" }}>
-            <MyFavouritePanel
-              myFavorites={myFavorites} // favourite list stored
-              handleSetKeyword={handleSetKeyword}
-              clearMyFavorites={clearMyFavorites} // clear fav
-            />
-          </Item>
+        <Grid
+          item
+          xs={3}
+          md={3}
+          style={{
+            backgroundColor: "white",
+            overflowY: "scroll",
+          }}
+        >
+          <MyFavouritePanel
+            myFavorites={myFavorites}
+            handleSetKeyword={handleSetKeyword}
+            clearMyFavorites={clearMyFavorites}
+          />
         </Grid>
 
         {/* DISPLAY RESULTS✅ */}
-        <Grid xs={9} md={9}>
-          <Item style={{ backgroundColor: "orange", height: "100%" }}>
+        <Grid item xs={9} md={9}>
+          <div ref={displayResultsRef}>
             <DisplayResults
-              page={page} // pagination
-              keyword={keyword} // for searching
-              updateMyFavorites={updateMyFavorites} // update fav
-              onLoadMore={onLoadMore} // load more btn
+              page={page}
+              keyword={keyword}
+              updateMyFavorites={updateMyFavorites}
+              onLoadMore={onLoadMore}
             />
-          </Item>
+          </div>
         </Grid>
 
         {/* FOOTER */}

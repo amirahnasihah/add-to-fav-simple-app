@@ -1,8 +1,11 @@
-import { AppBar, Box, Button, Chip, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Chip, Toolbar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import icon from "../assets/icon.png";
+import FaceIcon from "@mui/icons-material/Face";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // MUI SEARCH BAR STYLING
 const Search = styled("div")(({ theme }) => ({
@@ -46,6 +49,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header({ keyword, handleSetKeyword }) {
+  const [userName, setUserName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmitLogout = () => {
+    setIsLoggedIn(!isLoggedIn);
+    setUserName("");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    setUserName(JSON.parse(localStorage.getItem("userName")));
+    setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")));
+  }, []);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="secondary">
@@ -76,8 +94,14 @@ export default function Header({ keyword, handleSetKeyword }) {
 
           {/* LOGOUT, CHIP */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Chip label="Chip Filled" sx={{ marginRight: 1 }} />
-            <Button color="inherit">LogOut</Button>
+            <Chip
+              icon={<FaceIcon style={{ color: "pink" }} />}
+              label={userName}
+              sx={{ marginRight: 1, color: "white" }}
+            />
+            <Button color="inherit" size="small" onClick={handleSubmitLogout}>
+              Logout
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

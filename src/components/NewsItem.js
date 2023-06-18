@@ -44,6 +44,7 @@ export default function DatasItem({ news, updateMyFavorites }) {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton
+          style={{ color: "purple" }}
           aria-label="add to favorites"
           onClick={() => updateMyFavorites(news)}
         >

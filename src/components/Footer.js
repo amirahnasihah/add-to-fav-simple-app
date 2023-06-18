@@ -1,5 +1,7 @@
-import { Button, Grid, Typography, Link, Box } from "@mui/material";
+import { Typography, Link } from "@mui/material";
 import icon from "../assets/icon.png";
+import { styled } from "@mui/material/styles";
+import { Paper } from "@mui/material";
 
 function Footer() {
   return (

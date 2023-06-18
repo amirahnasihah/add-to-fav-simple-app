@@ -78,18 +78,19 @@ export default function DisplayResults({
         />
       )}
       {!isLoading && hasMore && (
-        <Button
-          variant="contained"
-          size="small"
-          style={{
-            margin: 10,
-            backgroundColor: "plum",
-            color: "purple",
-          }}
-          onClick={onLoadMore}
-        >
-          Load More
-        </Button>
+        <Box sx={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              backgroundColor: "plum",
+              color: "purple",
+            }}
+            onClick={onLoadMore}
+          >
+            Load More
+          </Button>
+        </Box>
       )}
     </Box>
   );

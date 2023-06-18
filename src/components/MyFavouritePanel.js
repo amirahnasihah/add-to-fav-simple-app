@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Badge, Box, Button, Typography } from "@mui/material";
 
 export default function FavPanel({
   handleSetKeyword,
@@ -6,42 +6,50 @@ export default function FavPanel({
   clearMyFavorites,
 }) {
   return (
-    <Grid item>
-      <Typography variant="h6">My Favourite: {myFavorites.length}</Typography>
+    <Box sx={{ p: 2 }}>
+      <Badge
+        badgeContent={myFavorites.length}
+        color="secondary"
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          My Favorites
+        </Typography>
+      </Badge>
 
       <Button
         variant="contained"
         size="small"
         color="secondary"
         onClick={clearMyFavorites}
+        sx={{ m: 2 }}
       >
-        CLEAR
+        Clear
       </Button>
-      <Box>
-        <div>
-          {myFavorites
-            .filter((item) => item)
-            .map((item) => (
-              <div
-                key={item.id}
-                style={{
-                  paddingTop: "8px",
-                }}
-              >
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link"
-                  onClick={() => handleSetKeyword}
-                >
-                  <Typography variant="caption">{item.title}</Typography>
-                </a>
-                <hr />
-              </div>
-            ))}
-        </div>
+      <Box sx={{ maxHeight: "calc(100vh - 330px)" }}>
+        {myFavorites.map((item) => (
+          <Box key={item.id} sx={{ py: 1, borderBottom: "1px solid grey" }}>
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+              onClick={() => handleSetKeyword}
+              sx={{ textDecoration: "none" }}
+            >
+              <Typography variant="caption">
+                <span role="img" aria-label="emoji">
+                  👉
+                </span>
+                {item.title}
+              </Typography>
+            </a>
+          </Box>
+        ))}
       </Box>
-    </Grid>
+    </Box>
   );
 }

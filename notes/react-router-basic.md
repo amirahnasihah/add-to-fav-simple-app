@@ -224,3 +224,84 @@ However, it's not inside of our root @ App.js layout 😠
 
 We want the `item` component to render inside of the `<App>` layout like this.
 
+We do it by making the contact route a child of the root route.
+
+👉 Move the contacts route to be a child of the root route
+
+**index.js**
+
+```javascript
+/* existing code */
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+
+    // add `children` to the root
+    children: [
+      {
+        path: "items/:itemId",
+        element: <Item />,
+      },
+    ],
+  },
+]);
+
+/* existing code */
+```
+
+You'll now see the root layout again but a blank page on the right. We need to tell the root route *where* we want it to render its child routes. We do that with `<Outlet>`.
+
+**App.js**
+
+```javascript
+import { Outlet } from "react-router-dom"; // add Outlet
+
+export default function App() {
+  return (
+    <>
+      {/* all the other elements */}
+      <div id="detail">
+        <Outlet />
+      </div>
+    </>
+  );
+}
+```
+
+### Client Side Routing
+
+Client side routing allows our app to update the URL without requesting another document from the server. Instead, the app can immediately render new UI. Let's make it happen with `<Link>`.
+
+👉 Change the sidebar `<a href>` to `<Link to>`
+
+**App.js**
+
+```javascript
+import { Outlet, Link } from "react-router-dom"; // add Link
+
+export default function Root() {
+  return (
+    <>
+      <div id="sidebar">
+        {/* other elements */}
+
+        <nav>
+          <ul>
+            <li>
+              <Link to={`contacts/1`}>Your Name</Link>
+            </li>
+            <li>
+              <Link to={`contacts/2`}>Your Friend</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* other elements */}
+      </div>
+    </>
+  );
+}
+```
