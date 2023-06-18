@@ -9,6 +9,7 @@ import {
   Grid,
   Link,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -95,30 +96,35 @@ export default function Login() {
           sx={{ mt: 1 }}
           onSubmit={handleSubmitLogin}
         >
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            value={userName} // Add this line
-            onChange={(e) => setUserName(e.target.value)} // Add this line
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password} // Add this line
-            onChange={(e) => setPassword(e.target.value)} // Add this line
-          />
+          <Tooltip title="Dummy username: John" placement="left">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </Tooltip>
+
+          <Tooltip title="Dummy password: 12345" placement="left">
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Tooltip>
 
           {!isLoginInProgress ? (
             <Button

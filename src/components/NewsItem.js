@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardMedia,
   IconButton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
@@ -43,13 +44,15 @@ export default function DatasItem({ news, updateMyFavorites }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton
-          style={{ color: "purple" }}
-          aria-label="add to favorites"
-          onClick={() => updateMyFavorites(news)}
-        >
-          <AddCircleRoundedIcon />
-        </IconButton>
+        <Tooltip title="Add to fav" placement="top">
+          <IconButton
+            style={{ color: "purple" }}
+            aria-label="add to favorites"
+            onClick={() => updateMyFavorites(news)}
+          >
+            <AddCircleRoundedIcon />
+          </IconButton>
+        </Tooltip>
         <Button
           variant="outlined"
           size="small"
