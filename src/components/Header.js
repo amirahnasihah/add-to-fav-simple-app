@@ -70,12 +70,12 @@ export default function Header({ keyword, handleSetKeyword }) {
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {/* LOGO */}
+            SEHA
             <img
               style={{ width: 22, display: { md: "flex" }, marginRight: 1 }}
               src={icon}
               alt="icon ketupat"
             />
-
             {/* SEARCH INPUT */}
             <Search>
               <SearchIconWrapper>
