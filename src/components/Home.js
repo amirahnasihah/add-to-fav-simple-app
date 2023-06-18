@@ -29,6 +29,7 @@ export default function Home() {
   const [myFavorites, setMyFavorites] = useState(
     JSON.parse(localStorage.getItem(LOCALS_STORAGE_KEY)) ?? []
   );
+
   // REF for display results height
   const displayResultsRef = useRef(null);
 
@@ -76,7 +77,7 @@ export default function Home() {
         JSON.stringify([...myFavorites, newFavorite])
       );
     } else {
-      toast.success("Added to favourites list");
+      toast.success("Already added to favourites");
     }
   };
 

@@ -7,7 +7,7 @@ import FaceIcon from "@mui/icons-material/Face";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// MUI SEARCH BAR STYLING
+// SEARCH BAR STYLING
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -70,7 +70,6 @@ export default function Header({ keyword, handleSetKeyword }) {
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {/* LOGO */}
-
             <img
               style={{ width: 22, display: { md: "flex" }, marginRight: 1 }}
               src={icon}
@@ -92,7 +91,7 @@ export default function Header({ keyword, handleSetKeyword }) {
             </Search>
           </Box>
 
-          {/* LOGOUT, CHIP */}
+          {/* LOGOUT + CHIP */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Chip
               icon={<FaceIcon style={{ color: "pink" }} />}

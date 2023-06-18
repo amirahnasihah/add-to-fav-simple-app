@@ -56,7 +56,6 @@ export default function DisplayResults({
                 key={index}
                 news={item}
                 updateMyFavorites={updateMyFavorites}
-                // index={index} // numbering order bcs id is null
               />
             </Grid>
           ))
@@ -95,13 +94,3 @@ export default function DisplayResults({
     </Box>
   );
 }
-
-// const filterNewsData = newsData.filter((item) => {
-//   const propertiesToSearch = [item.name, item.description];
-//   const keywordLowerCase = keyword.toLowerCase();
-
-//   return propertiesToSearch.some(
-//     (property) =>
-//       property && property.toLowerCase().includes(keywordLowerCase)
-//   );
-// });

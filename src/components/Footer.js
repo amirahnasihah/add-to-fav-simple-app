@@ -1,7 +1,5 @@
 import { Typography, Link } from "@mui/material";
 import icon from "../assets/icon.png";
-import { styled } from "@mui/material/styles";
-import { Paper } from "@mui/material";
 
 function Footer() {
   return (
@@ -24,7 +22,7 @@ function Footer() {
         {". source code can be accessed on "}
         <Link
           href="https://github.com/amirahnasihah/add-to-fav-simple-app"
-          title="GitHub food-order-website-usereducer"
+          title="GitHub Add To Fav Mock Api"
           target="_blank"
           style={{ color: "white", textDecorationLine: "none" }}
           rel="noopener noreferrer"
