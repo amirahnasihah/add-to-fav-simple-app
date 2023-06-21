@@ -1,4 +1,11 @@
-import { Badge, Box, Button, Tooltip, Typography } from "@mui/material";
+import {
+  Badge,
+  Box,
+  Button,
+  Divider,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 
 export default function FavPanel({
   handleSetKeyword,
@@ -32,14 +39,13 @@ export default function FavPanel({
       <Box sx={{ maxHeight: "calc(100vh - 330px)" }}>
         {myFavorites.map((item) => (
           <Tooltip title="Read" placement="right-end">
-            <Box key={item.id} sx={{ py: 1, borderBottom: "1px solid grey" }}>
+            <Box key={item.id}>
               <a
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link"
-                onClick={() => handleSetKeyword}
-                sx={{ textDecoration: "none" }}
+                onClick={handleSetKeyword}
               >
                 <Typography variant="caption">
                   <span role="img" aria-label="emoji">
@@ -48,6 +54,7 @@ export default function FavPanel({
                   {item.title}
                 </Typography>
               </a>
+              <Divider />
             </Box>
           </Tooltip>
         ))}

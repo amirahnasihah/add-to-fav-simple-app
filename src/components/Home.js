@@ -103,10 +103,9 @@ export default function Home() {
         {/* FAV PANEL */}
         <Grid
           item
-          xs={3}
+          xs={4}
           md={3}
           style={{
-            backgroundColor: "white",
             overflowY: "scroll",
           }}
         >
@@ -118,7 +117,7 @@ export default function Home() {
         </Grid>
 
         {/* DISPLAY RESULTS✅ */}
-        <Grid item xs={9} md={9}>
+        <Grid item xs={8} md={9}>
           <div ref={displayResultsRef}>
             <DisplayResults
               page={page}
