@@ -90,13 +90,14 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+
         <Box
           component="form"
           noValidate
           sx={{ mt: 1 }}
           onSubmit={handleSubmitLogin}
         >
-          <Tooltip title="Dummy username: John" placement="left">
+          <Tooltip title="John" placement="top-end">
             <TextField
               margin="normal"
               required
@@ -111,7 +112,7 @@ export default function Login() {
             />
           </Tooltip>
 
-          <Tooltip title="Dummy password: 12345" placement="left">
+          <Tooltip title="12345" placement="top-end">
             <TextField
               margin="normal"
               required
@@ -161,6 +162,21 @@ export default function Login() {
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="caption"
+          sx={{ color: "grey", fontFamily: "monospace", fontSize: 9 }}
+        >
+          Dummy login: John | 12345
+        </Typography>
+      </Box>
     </Container>
   );
 }
