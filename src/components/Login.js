@@ -25,9 +25,12 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      {"amirahnasihah © "}
+      <Link
+        color="inherit"
+        href="https://github.com/amirahnasihah/add-to-fav-simple-app"
+      >
+        Github Code
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
