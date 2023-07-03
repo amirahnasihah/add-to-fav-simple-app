@@ -39,6 +39,7 @@ export default function DisplayResults({
       setNewsData(response.data);
       setHasMore(response.data.length > 0);
       setIsLoading(false);
+      console.log("API response: ", response);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
