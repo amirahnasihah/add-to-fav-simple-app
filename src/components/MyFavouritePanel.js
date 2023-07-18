@@ -7,11 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function MyFavouritePanel({
-  handleSetKeyword,
-  myFavorites,
-  clearMyFavorites,
-}) {
+export default function MyFavouritePanel({ myFavorites, clearMyFavorites }) {
   return (
     <Box sx={{ p: 2 }}>
       <Badge
@@ -45,9 +41,8 @@ export default function MyFavouritePanel({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link"
-                onClick={handleSetKeyword}
               >
-                <Typography variant="caption">
+                <Typography variant="body1">
                   <span role="img" aria-label="emoji">
                     👉
                   </span>
