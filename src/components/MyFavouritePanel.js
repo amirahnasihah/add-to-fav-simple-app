@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function FavPanel({
+export default function MyFavouritePanel({
   handleSetKeyword,
   myFavorites,
   clearMyFavorites,
@@ -37,9 +37,9 @@ export default function FavPanel({
         Clear
       </Button>
       <Box sx={{ maxHeight: "calc(100vh - 330px)" }}>
-        {myFavorites.map((item) => (
-          <Tooltip title="Read" placement="right-end">
-            <Box key={item.id}>
+        {myFavorites.map((item, index) => (
+          <Tooltip title="Read" placement="right-end" key={index}>
+            <Box>
               <a
                 href={item.url}
                 target="_blank"

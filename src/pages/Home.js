@@ -4,10 +4,11 @@ import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 // COMPONENTS
-import Header from "./Header";
-import MyFavouritePanel from "./MyFavouritePanel";
-import DisplayResults from "./DisplayResults";
-import Footer from "./Footer";
+import Header from "../components/Header";
+import MyFavouritePanel from "../components/MyFavouritePanel";
+import DisplayResults from "../components/DisplayResults";
+import Footer from "../components/Footer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // STYLING
 const Item = styled(Paper)(({ theme }) => ({
@@ -20,6 +21,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 // MAIN LOGIC
 export default function Home() {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("isLoggedIn")) || false
+  );
   // SEARCH BAR STATE✅
   const [keyword, setKeyword] = useState("");
   // PAGINATION STATE✅
@@ -92,6 +97,10 @@ export default function Home() {
     }
   }, [page]);
 
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -118,14 +127,14 @@ export default function Home() {
 
         {/* DISPLAY RESULTS✅ */}
         <Grid item xs={8} md={9}>
-          <div ref={displayResultsRef}>
+          <Box ref={displayResultsRef}>
             <DisplayResults
               page={page}
               keyword={keyword}
               updateMyFavorites={updateMyFavorites}
               onLoadMore={onLoadMore}
             />
-          </div>
+          </Box>
         </Grid>
 
         {/* FOOTER */}

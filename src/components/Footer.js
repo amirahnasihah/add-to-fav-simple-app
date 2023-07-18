@@ -9,22 +9,12 @@ function Footer() {
       <Typography variant="h6">Start creating to see some magic!</Typography>
 
       <Typography variant="caption">
-        {"made by "}
-        <Link
-          href="http://amrhnshh-minimalist.vercel.app/"
-          rel="website"
-          title="Amirah Nasihah"
-          target="_blank"
-          style={{ color: "white", textDecorationLine: "none" }}
-        >
-          amirahnasihah
-        </Link>
-        {". source code can be accessed on "}
+        amirahnasihah || source code on{" "}
         <Link
           href="https://github.com/amirahnasihah/add-to-fav-simple-app"
           title="GitHub Add To Fav Mock Api"
           target="_blank"
-          style={{ color: "white", textDecorationLine: "none" }}
+          style={{ color: "green", textDecorationLine: "none" }}
           rel="noopener noreferrer"
         >
           GitHub

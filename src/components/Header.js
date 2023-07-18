@@ -1,4 +1,12 @@
-import { AppBar, Box, Button, Chip, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Chip,
+  CircularProgress,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -51,12 +59,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header({ keyword, handleSetKeyword }) {
   const [userName, setUserName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLogoutInProgress, setIsLogoutInProgress] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmitLogout = () => {
-    setIsLoggedIn(!isLoggedIn);
-    setUserName("");
-    navigate("/");
+    setIsLogoutInProgress(true);
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+
+    setTimeout(() => {
+      setIsLoggedIn(!isLoggedIn);
+      setIsLogoutInProgress(false);
+      setUserName("");
+      navigate("/");
+      alert("Logged out");
+    }, 3000);
   };
 
   useEffect(() => {
@@ -98,9 +115,15 @@ export default function Header({ keyword, handleSetKeyword }) {
               label={userName}
               sx={{ marginRight: 1, color: "white" }}
             />
-            <Button color="inherit" size="small" onClick={handleSubmitLogout}>
-              Logout
-            </Button>
+            {isLogoutInProgress ? (
+              <Button color="inherit" size="small" onClick={handleSubmitLogout}>
+                Out...
+              </Button>
+            ) : (
+              <Button color="inherit" size="small" onClick={handleSubmitLogout}>
+                Logout
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

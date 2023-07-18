@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -42,9 +42,22 @@ export default function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    JSON.parse(localStorage.getItem("isLoggedIn")) || false
+  );
   const [isLoginInProgress, setIsLoginInProgress] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      if (isLoggedIn) {
+        navigate("/home", { replace: true });
+      }
+    };
+
+    checkLoginStatus();
+  }, [navigate]);
 
   // Function to handle login and submit login form
   const handleSubmitLogin = (e) => {
@@ -73,7 +86,7 @@ export default function Login() {
   };
 
   if (isLoggedIn) {
-    return <Navigate to="/home">Home</Navigate>;
+    return <Navigate to="/home" replace />;
   }
 
   return (

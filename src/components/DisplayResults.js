@@ -27,24 +27,24 @@ export default function DisplayResults({
 
   // get data from api
   useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await api.get("/favourites");
+        // PAGINATION LOGIC
+        setNewsData(response.data);
+        setHasMore(response.data.length > 0);
+        setIsLoading(false);
+        // console.log("API response: ", response); //
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
+
     getData();
   }, []);
-
-  const getData = async () => {
-    setIsLoading(true);
-
-    try {
-      const response = await api.get("/favourites");
-      // PAGINATION LOGIC
-      setNewsData(response.data);
-      setHasMore(response.data.length > 0);
-      setIsLoading(false);
-      console.log("API response: ", response);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
 
   return (
     <Box>
