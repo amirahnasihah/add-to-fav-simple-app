@@ -74,6 +74,9 @@ export default function DisplayResults({
         <CircularProgress
           style={{
             color: "purple",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: 10,
           }}
         />
       )}
