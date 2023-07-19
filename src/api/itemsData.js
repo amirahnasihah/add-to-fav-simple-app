@@ -1,6 +1,5 @@
 import axios from "axios";
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 export default axios.create({
-  baseURL: `https://${API_KEY}.mockapi.io`,
+  baseURL: `https://64188b7a29e7e36438eb6466.mockapi.io`,
 });
